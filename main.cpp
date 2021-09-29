@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void groupMembers() {
+void about() {
     cout << "*****************************************" << endl;
     cout << "* Section: IT11S1                       *" << endl;
     cout << "* Group 4:                              *" << endl;
@@ -22,11 +22,17 @@ string stringToLower(string convertFrom) {
     return convertFrom;
 }
 
-void cleanCin() {
+void validateCinInt(int &number, int failReturn) {
+    int confirmCin;
+    cin >> confirmCin;
     if (cin.fail()) {
         cin.clear();
-        cin.ignore(1, '\n');
+        cin.ignore(255, '\n');
         cout << "Please type a number" << endl;
+        number = failReturn;
+    } else {
+        cin.ignore(255, '\n');
+        number = confirmCin;
     }
 }
 
@@ -162,22 +168,22 @@ void addToCart(int itemID) {
         cout << "How many will you add?" << endl;
         cout << "Enter the number: ";
         int addQuantity = 0;
-        cin >> addQuantity;
-        cleanCin();
-        itemQuantity[cartIndex[itemID]] = itemQuantity[cartIndex[itemID]] + addQuantity;
-        cout << endl;
+        validateCinInt(addQuantity, 0);
+        if (addQuantity >= 1) {
+            itemQuantity[cartIndex[itemID]] = itemQuantity[cartIndex[itemID]] + addQuantity;
+        } else {
+            cout << "The quantity of this item is not added to the cart" << endl;
+        }
     } else {
         cout << "Enter the quantity: ";
         int checkQuantity = 0;
-        cin >> checkQuantity;
-        cleanCin();
+        validateCinInt(checkQuantity, 0);
         if (checkQuantity >= 1) {
             inCart[itemID] = true;
             cartIndex[itemID] = itemCounter;
             cartItems[cartIndex[itemID]] = itemList(itemID);
             cartPrices[cartIndex[itemID]] = priceList(itemID);
             itemQuantity[cartIndex[itemID]] = checkQuantity;
-            cout << endl;
             itemCounter++;
         } else {
             cout << "Your item was not added to the cart" << endl << endl;
@@ -186,6 +192,7 @@ void addToCart(int itemID) {
 }
 
 void subcategoryMenu(int firstCase, int secondCase, int thirdCase) {
+    cout << endl;
     cout << "#: Price: Item Name:" << endl;
     cout << "1. P" << priceList(firstCase) << " " << itemList(firstCase) << endl;
     cout << "2. P" << priceList(secondCase) << " " << itemList(secondCase) << endl;
@@ -196,27 +203,27 @@ void subcategoryMenu(int firstCase, int secondCase, int thirdCase) {
 }
 
 void subcategorySwitch(string brandName, int firstCase, int secondCase, int thirdCase) {
-    char selection;
+    int selection;
     bool back = true;
     do {\
         cout << brandName << ":" << endl;
         subcategoryMenu(firstCase, secondCase, thirdCase);
-        cin >> selection;
+        validateCinInt(selection, 5);
         switch (selection) {
-            case '0':
+            case 0:
                 back = false;
                 repeatMenu = false;
                 break;
-            case '1':
+            case 1:
                 addToCart(firstCase);
                 break;
-            case '2':
+            case 2:
                 addToCart(secondCase);
                 break;
-            case '3':
+            case 3:
                 addToCart(thirdCase);
                 break;
-            case '4':
+            case 4:
                 back = false;
                 break;
             default:
@@ -227,7 +234,7 @@ void subcategorySwitch(string brandName, int firstCase, int secondCase, int thir
 }
 
 void categoryMenu(string subcategory, string firstCase, string secondCase, string thirdCase) {
-    cout << subcategory << endl;
+    cout << endl <<  subcategory << endl;
     cout << "1. " << firstCase << endl;
     cout << "2. " << secondCase << endl;
     cout << "3. " << thirdCase << endl;
@@ -236,26 +243,22 @@ void categoryMenu(string subcategory, string firstCase, string secondCase, strin
 }
 
 void categorySwitch(string cat, string s1, int s1c1, int s1c2, int s1c3, string s2, int s2c1, int s2c2, int s2c3, string s3, int s3c1, int s3c2, int s3c3) {
-    char selection;
+    int selection;
     do {
         repeatMenu = true;
-        cout << endl;
         categoryMenu(cat, s1, s2, s3);
-        cin >> selection;
+        validateCinInt(selection, 4);
         switch (selection) {
-            case '0':
+            case 0:
                 repeatMenu = false;
                 break;
-            case '1': 
-                cout << endl;
+            case 1: 
                 subcategorySwitch(s1, s1c1, s1c2, s1c3);
                 break;
-            case '2':
-                cout << endl;
+            case 2:
                 subcategorySwitch(s2, s2c1, s2c2, s2c3);
                 break;
-            case '3':
-                cout << endl;
+            case 3:
                 subcategorySwitch(s3 , s3c1, s3c2, s3c3);
                 break;
             default:
@@ -273,13 +276,22 @@ void mainMenu() {
     cout << "4. Webcam" << endl;
     cout << "5. Gamepad" << endl;
     cout << "6. Clear Cart" << endl;
-    cout << "7. Exit" << endl;
+    cout << "7. About Us" << endl;
+    cout << "8. Exit" << endl;
     cout << "Enter a number: ";
 }
 
-bool repeat() {
-    cout << "Do you want another transaction?" << endl;
-    cout << "(Y/n): ";
+bool repeat(int mode) {
+    switch (mode) {
+        case 1:
+            cout << "Do you want another transaction?" << endl;
+            cout << "(Y/n): ";
+            break;
+        case 2:
+            cout << "Continue as a new user:" << endl;
+            cout << "(Y/n): ";
+            break;
+    }
     string confirm;
     getline(cin, confirm);
     confirm = stringToLower(confirm);
@@ -300,7 +312,6 @@ int calculateTotalPrice(int totalPrice) {
 }
 
 int main() {
-    groupMembers();
     bool run = true;
     int totalPrice;
 
@@ -321,18 +332,18 @@ int main() {
         while (back) {
             cout << endl << "Shopping cart: " << endl;
             if (itemCounter == 0) {
-                cout << "None" << endl << endl;
+                cout << "None" << endl;
             } else {
                 showShoppingCart();
-                cout << endl << "\t\t\t\t\t\t\t   Total price: P" << calculateTotalPrice(totalPrice) << endl << endl;
+                cout << endl << "\t\t\t\t\t\t\t   Total price: P" << calculateTotalPrice(totalPrice) << endl;
             }
 
             cout << "How may we help you?" << endl;
             mainMenu();
-            char selection;
-            cin >> selection;
+            int selection;
+            validateCinInt(selection, 9);
             switch (selection) {
-                case '0':
+                case 0:
                     if (itemCounter == 0) {
                         cout << "Nothing is in the cart" << endl;
                     } else {
@@ -365,7 +376,7 @@ int main() {
                                 cout << "\t\t\t\t\t\t\t        Change: P" << change << endl;
                                 cout << endl;
                                 back = false;
-                                run = repeat();
+                                run = repeat(1);
                             }
                             } else if (amount == 0) {
                                 cout << "The checkout is successfully cancelled" << endl;
@@ -375,27 +386,31 @@ int main() {
                             }
                     }
                     break;
-                case '1':
+                case 1:
                     categorySwitch("Keyboard:", "Fantech", 0, 1, 2, "Logitech", 3, 4, 5, "Rakk", 6, 7, 8);
                     break;
-                case '2':
+                case 2:
                     categorySwitch("Mouse:", "Razer", 9, 10, 11, "Logitech", 12, 13, 14, "Asus", 15, 16, 17);
                     break;
-                case '3':
+                case 3:
                     categorySwitch("Headset:", "Razer", 18, 19, 20, "Corsair", 21, 22, 23, "Steel Series", 24, 25, 26);
                     break;
-                case '4':
+                case 4:
                     categorySwitch("Webcam:", "Logitech", 27, 28, 29, "Microsoft", 30, 31, 32, "Ausdom", 33, 34, 35);
                     break;
-                case '5':
+                case 5:
                     categorySwitch("Gamepad:", "Senze", 36, 37, 38, "Razer", 39, 40, 41, "Sony", 42, 43, 44);
                     break;
-                case '6':
+                case 6:
                     clearCart();
                     break;
-                case '7':
+                case 7:
+                    about();
+                    break;
+                case 8:
+                    cout << endl;
                     back = false;
-                    run = false;
+                    run = repeat(2);
                     break;
                 default:
                     cout << "Not in the choices. Please try again." << endl;
