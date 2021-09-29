@@ -22,6 +22,14 @@ string stringToLower(string convertFrom) {
     return convertFrom;
 }
 
+void cleanCin() {
+    if (cin.fail()) {
+        cin.clear();
+        cin.ignore(1, '\n');
+        cout << "Please type a number" << endl;
+    }
+}
+
 string itemList(int itemID) {
     string itemIDs[45];
     itemIDs[0] = "Fantech MK853 Max Power BLUE SWITCH RGB Gaming Keyboard";
@@ -155,12 +163,14 @@ void addToCart(int itemID) {
         cout << "Enter the number: ";
         int addQuantity = 0;
         cin >> addQuantity;
+        cleanCin();
         itemQuantity[cartIndex[itemID]] = itemQuantity[cartIndex[itemID]] + addQuantity;
         cout << endl;
     } else {
         cout << "Enter the quantity: ";
         int checkQuantity = 0;
         cin >> checkQuantity;
+        cleanCin();
         if (checkQuantity >= 1) {
             inCart[itemID] = true;
             cartIndex[itemID] = itemCounter;
@@ -186,27 +196,27 @@ void subcategoryMenu(int firstCase, int secondCase, int thirdCase) {
 }
 
 void subcategorySwitch(string brandName, int firstCase, int secondCase, int thirdCase) {
-    int selection;
+    char selection;
     bool back = true;
     do {\
         cout << brandName << ":" << endl;
         subcategoryMenu(firstCase, secondCase, thirdCase);
         cin >> selection;
         switch (selection) {
-            case 0:
+            case '0':
                 back = false;
                 repeatMenu = false;
                 break;
-            case 1:
+            case '1':
                 addToCart(firstCase);
                 break;
-            case 2:
+            case '2':
                 addToCart(secondCase);
                 break;
-            case 3:
+            case '3':
                 addToCart(thirdCase);
                 break;
-            case 4:
+            case '4':
                 back = false;
                 break;
             default:
@@ -225,26 +235,26 @@ void categoryMenu(string subcategory, string firstCase, string secondCase, strin
     cout << "Enter a number: ";
 }
 
-void categorySwitch(string c, string s1, int s1c1, int s1c2, int s1c3, string s2, int s2c1, int s2c2, int s2c3, string s3, int s3c1, int s3c2, int s3c3) {
-    int selection;
+void categorySwitch(string cat, string s1, int s1c1, int s1c2, int s1c3, string s2, int s2c1, int s2c2, int s2c3, string s3, int s3c1, int s3c2, int s3c3) {
+    char selection;
     do {
         repeatMenu = true;
         cout << endl;
-        categoryMenu(c, s1, s2, s3);
+        categoryMenu(cat, s1, s2, s3);
         cin >> selection;
         switch (selection) {
-            case 0:
+            case '0':
                 repeatMenu = false;
                 break;
-            case 1: 
+            case '1': 
                 cout << endl;
                 subcategorySwitch(s1, s1c1, s1c2, s1c3);
                 break;
-            case 2:
+            case '2':
                 cout << endl;
                 subcategorySwitch(s2, s2c1, s2c2, s2c3);
                 break;
-            case 3:
+            case '3':
                 cout << endl;
                 subcategorySwitch(s3 , s3c1, s3c2, s3c3);
                 break;
@@ -319,10 +329,10 @@ int main() {
 
             cout << "How may we help you?" << endl;
             mainMenu();
-            int selection;
+            char selection;
             cin >> selection;
             switch (selection) {
-                case 0:
+                case '0':
                     if (itemCounter == 0) {
                         cout << "Nothing is in the cart" << endl;
                     } else {
@@ -357,31 +367,33 @@ int main() {
                                 back = false;
                                 run = repeat();
                             }
-                        } else {
-                            cout << "The amount you entered is in insufficient." << endl;
-                            cout << "Please try again." << endl;
+                            } else if (amount == 0) {
+                                cout << "The checkout is successfully cancelled" << endl;
+                            } else {
+                                cout << "The amount you entered is in insufficient." << endl;
+                                cout << "Please try again." << endl;
                             }
                     }
                     break;
-                case 1:
+                case '1':
                     categorySwitch("Keyboard:", "Fantech", 0, 1, 2, "Logitech", 3, 4, 5, "Rakk", 6, 7, 8);
                     break;
-                case 2:
+                case '2':
                     categorySwitch("Mouse:", "Razer", 9, 10, 11, "Logitech", 12, 13, 14, "Asus", 15, 16, 17);
                     break;
-                case 3:
+                case '3':
                     categorySwitch("Headset:", "Razer", 18, 19, 20, "Corsair", 21, 22, 23, "Steel Series", 24, 25, 26);
                     break;
-                case 4:
+                case '4':
                     categorySwitch("Webcam:", "Logitech", 27, 28, 29, "Microsoft", 30, 31, 32, "Ausdom", 33, 34, 35);
                     break;
-                case 5:
+                case '5':
                     categorySwitch("Gamepad:", "Senze", 36, 37, 38, "Razer", 39, 40, 41, "Sony", 42, 43, 44);
                     break;
-                case 6:
+                case '6':
                     clearCart();
                     break;
-                case 7:
+                case '7':
                     back = false;
                     run = false;
                     break;
