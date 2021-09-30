@@ -164,15 +164,34 @@ void showShoppingCart() {
 
 void addToCart(int itemID) {
     if (inCart[itemID]) {
+        cout << "How many will you modify?" << endl;
         cout << "Current quantity: " << itemQuantity[cartIndex[itemID]] << endl;
-        cout << "How many will you add?" << endl;
-        cout << "Enter the number: ";
-        int addQuantity = 0;
-        validateCinInt(addQuantity, 0);
-        if (addQuantity >= 1) {
-            itemQuantity[cartIndex[itemID]] = itemQuantity[cartIndex[itemID]] + addQuantity;
-        } else {
-            cout << "The quantity of this item is not added to the cart" << endl;
+        cout << "(+/-)(#): ";
+        char operation;
+        int newQuantity = 0;
+        cin >> operation;
+        validateCinInt(newQuantity, 0);
+        switch (operation) {
+            case '+':
+                if (newQuantity >= 1) {
+                    itemQuantity[cartIndex[itemID]] = itemQuantity[cartIndex[itemID]] + newQuantity;
+                    cout << newQuantity << " quantities have been successfully added." << endl;
+                } else {
+                    cout << "The quantity of this item is not added to the cart" << endl;
+                }
+                break;
+            case '-':
+                if (newQuantity >= itemQuantity[cartIndex[itemID]]) {
+                    itemQuantity[cartIndex[itemID]] = 1;
+                    cout << "The quantity is subtracted to 1" << endl;
+                } else {
+                    itemQuantity[cartIndex[itemID]] = itemQuantity[cartIndex[itemID]] - newQuantity;
+                    cout << newQuantity << " quantities have been successfully subtracted" << endl;
+                }
+                break;
+            default:
+                cout << "Please specify the operation" << endl;
+                break;
         }
     } else {
         cout << "Enter the quantity: ";
@@ -192,7 +211,6 @@ void addToCart(int itemID) {
 }
 
 void subcategoryMenu(int firstCase, int secondCase, int thirdCase) {
-    cout << endl;
     cout << "#: Price: Item Name:" << endl;
     cout << "1. P" << priceList(firstCase) << " " << itemList(firstCase) << endl;
     cout << "2. P" << priceList(secondCase) << " " << itemList(secondCase) << endl;
@@ -206,7 +224,7 @@ void subcategorySwitch(string brandName, int firstCase, int secondCase, int thir
     int selection;
     bool back = true;
     do {\
-        cout << brandName << ":" << endl;
+        cout << endl << brandName << ":" << endl;
         subcategoryMenu(firstCase, secondCase, thirdCase);
         validateCinInt(selection, 5);
         switch (selection) {
@@ -332,7 +350,7 @@ int main() {
         while (back) {
             cout << endl << "Shopping cart: " << endl;
             if (itemCounter == 0) {
-                cout << "None" << endl;
+                cout << "None" << endl << endl;
             } else {
                 showShoppingCart();
                 cout << endl << "\t\t\t\t\t\t\t   Total price: P" << calculateTotalPrice(totalPrice) << endl;
