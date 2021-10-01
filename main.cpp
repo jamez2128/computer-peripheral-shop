@@ -3,16 +3,19 @@
 using namespace std;
 
 void about() {
-    cout << "*****************************************" << endl;
-    cout << "* Section: IT11S1                       *" << endl;
-    cout << "* Group 4:                              *" << endl;
-    cout << "* Cabrigas, Darlene Faye                *" << endl;
-    cout << "* Cuello, Diether John                  *" << endl;
-    cout << "* Geron, Aaron Josh                     *" << endl;
-    cout << "* Hernando, James Angelo                *" << endl;
-    cout << "* Oandasan, Marjorie                    *" << endl;
-    cout << "* Verbo, Keith Michael                  *" << endl;
-    cout << "*****************************************" << endl;
+    cout << "******************************************************************" << endl;
+    cout << "* School: TECHNOLOGICAL INSTITUTE OF THE PHILIPPINES - QC        *" << endl;
+    cout << "* Group 4:                                                       *" << endl;
+    cout << "* Cabrigas, Darlene Faye                                         *" << endl;
+    cout << "* Cuello, Diether John                                           *" << endl;
+    cout << "* Geron, Aaron Josh                                              *" << endl;
+    cout << "* Hernando, James Angelo                                         *" << endl;
+    cout << "* Oandasan, Marjorie                                             *" << endl;
+    cout << "* Verbo, Keith Michael                                           *" << endl;
+    cout << "* Program: BSIT                                                  *" << endl;
+    cout << "* Section: IT11S1                                                *" << endl;
+    cout << "* Final Project                                                  *" << endl;
+    cout << "*****************************************************************" << endl;
 }
 
 string stringToLower(string convertFrom) {
@@ -140,6 +143,7 @@ int itemCounter = 0;
 string cartItems[45];
 int cartPrices[45];
 int itemQuantity[45];
+int itemIDCart[45];
 bool inCart[45];
 int cartIndex[45];
 bool repeatMenu;
@@ -152,13 +156,14 @@ void clearCart() {
         itemQuantity[i] = 0;
         inCart[i] = false;
         cartIndex[i] = 0;
+        itemIDCart[i] = 0;
     }
 }
 
 void showShoppingCart() {
-     cout << "Item Name:\t\t\t\t\t\tPrice:  *:\t=:" << endl;
+     cout << "#: Item Name:\t\t\t\t\t\t   #:\tPrice:  *:\t=:" << endl;
     for (int i = 0; i < itemCounter; i++) {
-        cout << cartItems[i] << "\t" << "P" << cartPrices[i] << "\t" << itemQuantity[i] << "\tP" << cartPrices[i] * itemQuantity[i] << endl;
+        cout << (i+1) << ". " << cartItems[i] << " #" << itemIDCart[i] << "\t" << "P" << cartPrices[i] << "\t" << itemQuantity[i] << "\tP" << cartPrices[i] * itemQuantity[i] << endl;
     }
 }
 
@@ -170,9 +175,9 @@ void addToCart(int itemID) {
         char operation;
         int newQuantity = 0;
         cin >> operation;
-        validateCinInt(newQuantity, 0);
         switch (operation) {
             case '+':
+                validateCinInt(newQuantity, 0);
                 if (newQuantity >= 1) {
                     itemQuantity[cartIndex[itemID]] = itemQuantity[cartIndex[itemID]] + newQuantity;
                     cout << newQuantity << " quantities have been successfully added." << endl;
@@ -181,6 +186,7 @@ void addToCart(int itemID) {
                 }
                 break;
             case '-':
+                validateCinInt(newQuantity, 0);
                 if (newQuantity >= itemQuantity[cartIndex[itemID]]) {
                     itemQuantity[cartIndex[itemID]] = 1;
                     cout << "The quantity is subtracted to 1" << endl;
@@ -200,6 +206,7 @@ void addToCart(int itemID) {
         if (checkQuantity >= 1) {
             inCart[itemID] = true;
             cartIndex[itemID] = itemCounter;
+            itemIDCart[cartIndex[itemID]] = itemID;
             cartItems[cartIndex[itemID]] = itemList(itemID);
             cartPrices[cartIndex[itemID]] = priceList(itemID);
             itemQuantity[cartIndex[itemID]] = checkQuantity;
@@ -208,6 +215,25 @@ void addToCart(int itemID) {
             cout << "Your item was not added to the cart" << endl << endl;
         }
     }
+}
+
+void removeFromCart(int cartID) {
+    inCart[itemIDCart[cartID]] = false;
+    cartIndex[itemIDCart[cartID]] = 0;
+    itemIDCart[cartIndex[cartID]] = 0;
+    for (int i = cartID; i < itemCounter; i++) {
+        if (i+1 == itemCounter) {
+            
+        } else {
+            itemIDCart[i] = itemIDCart[i+1];
+            cartItems[i] = cartItems[i+1];
+            cartPrices[i] = cartPrices[i+1];
+            itemQuantity[i] = itemQuantity[i+1];
+            itemIDCart[i] = itemIDCart[i+1];
+            
+        }
+    }
+    itemCounter--;
 }
 
 void subcategoryMenu(int firstCase, int secondCase, int thirdCase) {
@@ -294,8 +320,9 @@ void mainMenu() {
     cout << "4. Webcam" << endl;
     cout << "5. Gamepad" << endl;
     cout << "6. Clear Cart" << endl;
-    cout << "7. About Us" << endl;
-    cout << "8. Exit" << endl;
+    cout << "7. Remove Item From Cart" << endl;
+    cout << "8. About Us" << endl;
+    cout << "9. Exit" << endl;
     cout << "Enter a number: ";
 }
 
@@ -353,7 +380,7 @@ int main() {
                 cout << "None" << endl << endl;
             } else {
                 showShoppingCart();
-                cout << endl << "\t\t\t\t\t\t\t   Total price: P" << calculateTotalPrice(totalPrice) << endl;
+                cout << endl << "\t\t\t\t\t\t\t\t   Total price: P" << calculateTotalPrice(totalPrice) << endl;
             }
 
             cout << "How may we help you?" << endl;
@@ -387,11 +414,11 @@ int main() {
                             cout << endl;
                             if (confirm == "y" || confirm == "yes") {
                                 cout << "RECEIPT:" << endl;
-                                cout << "Customer name: " << lastName << ", " << firstName << endl << endl;
+                                cout << "Customer name: " << lastName << ", " << firstName << endl;
                                 showShoppingCart();
-                                cout << endl << "\t\t\t\t\t\t\t   Total price: P" << totalPrice << endl;
-                                cout << "\t\t\t\t\t\t\t   Amount paid: P" << amount << endl;
-                                cout << "\t\t\t\t\t\t\t        Change: P" << change << endl;
+                                cout << endl << "\t\t\t\t\t\t\t\t   Total price: P" << totalPrice << endl;
+                                cout << "\t\t\t\t\t\t\t\t   Amount paid: P" << amount << endl;
+                                cout << "\t\t\t\t\t\t\t\t        Change: P" << change << endl;
                                 cout << endl;
                                 back = false;
                                 run = repeat(1);
@@ -423,9 +450,25 @@ int main() {
                     clearCart();
                     break;
                 case 7:
-                    about();
+                    cout << endl;
+                    if (itemCounter == 0) {
+                        cout << "Nothing is in the cart" << endl;
+                    } else {
+                        showShoppingCart();
+                        cout << "0. Exit" << endl; 
+                        int removeItem;
+                        cout << "Choose a number to remove an item: ";
+                        validateCinInt(removeItem, 0);
+                        if (removeItem >= 1 && removeItem <= itemCounter) {
+                            removeFromCart(removeItem-1);
+                        }
+                    }
                     break;
                 case 8:
+                    cout << endl;
+                    about();
+                    break;
+                case 9:
                     cout << endl;
                     back = false;
                     run = repeat(2);
