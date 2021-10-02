@@ -91,79 +91,79 @@ string itemList(int itemID) {
 
 int items[45][3] = {
     // Keyboard Fantech
-    {2708, false, 0},
-    {1201, false, 0},
-    {973, false, 0},
+    {2708, false, 0}, // 0
+    {1201, false, 0}, // 1
+    {973, false, 0}, // 2
     
     // Keyboard Logitech
-    {2423, false, 0},
-    {8031, false, 0},
-    {12485, false, 0},
+    {2423, false, 0}, // 3
+    {8031, false, 0}, // 4
+    {12485, false, 0}, // 5
     
     //Keyboard Rakk
-    {1803, false, 0},
-    {1200, false, 0},
-    {2406, false, 0},
+    {1803, false, 0}, // 6
+    {1200, false, 0}, // 7
+    {2406, false, 0}, // 8
     
     //Mouse Razer
-    {1998, false, 0},
-    {3496, false, 0},
-    {3511, false, 0},
+    {1998, false, 0}, // 9
+    {3496, false, 0}, // 10
+    {3511, false, 0}, // 11
     
     //Mouse Logitech
-    {4985, false, 0},
-    {4991, false, 0},
-    {4993, false, 0},
+    {4985, false, 0}, // 12
+    {4991, false, 0}, // 13
+    {4993, false, 0}, // 14
     
     //Mouse Asus
-    {1248, false, 0},
-    {3496, false, 0},
-    {6243, false, 0},
+    {1248, false, 0}, // 15
+    {3496, false, 0}, // 16
+    {6243, false, 0}, // 17
     
     //Headset Razer
-    {3496, false, 0},
-    {4994, false, 0},
-    {6492, false, 0},
+    {3496, false, 0}, // 18
+    {4994, false, 0}, // 19
+    {6492, false, 0}, // 20
     
     //Headset Corsair
-    {1998, false, 0},
-    {2996, false, 0},
-    {3496, false, 0},
+    {1998, false, 0}, // 21
+    {2996, false, 0}, // 22
+    {3496, false, 0}, // 23
     
     //Headset Steel Series
-    {3995, false, 0},
-    {5993, false, 0},
-    {6000, false, 0},
+    {3995, false, 0}, // 24
+    {5993, false, 0}, // 25
+    {6000, false, 0}, // 26
     
     //Webcam Logitech
-    {2803, false, 0},
-    {3772, false, 0},
-    {4995, false, 0},
+    {2803, false, 0}, // 27
+    {3772, false, 0}, // 28
+    {4995, false, 0}, // 29
     
     //Webcam Microsoft
-    {1648, false, 0},
-    {2996, false, 0},
-    {3995, false, 0},
+    {1648, false, 0}, // 30
+    {2996, false, 0}, // 31
+    {3995, false, 0}, // 32
     
     //Webcam Ausdom
-    {3502, false, 0},
-    {725, false, 0},
-    {1448, false, 0},
+    {3502, false, 0}, // 33
+    {725, false, 0}, // 34
+    {1448, false, 0}, // 35
     
     //Gamepad Senze
-    {585, false, 0},
-    {725, false, 0},
-    {1448, false, 0},
+    {585, false, 0}, // 36
+    {725, false, 0}, // 37
+    {1448, false, 0}, // 38
     
     //Gamepad Razer
-    {3995, false, 0},
-    {4994, false, 0},
-    {7491, false, 0},
+    {3995, false, 0}, // 39
+    {4994, false, 0}, // 40
+    {7491, false, 0}, // 41
     
     //Gamepad Sony
-    {2752, false, 0},
-    {1599, false, 0},
-    {3602, false, 0},
+    {2752, false, 0}, // 42
+    {1599, false, 0}, // 43
+    {3602, false, 0}, // 44
 };
 
 int itemCounter = 0;
