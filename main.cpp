@@ -89,88 +89,110 @@ string itemList(int itemID) {
     return itemIDs[itemID];
 }
 
-int priceList(int itemID) {
-    int priceIDs[45];
-    priceIDs[0] = 2708;
-    priceIDs[1] = 1221;
-    priceIDs[2] = 973;
-    priceIDs[3] = 2423;
-    priceIDs[4] = 8031;
-    priceIDs[5] = 12485;
-    priceIDs[6] = 1803;
-    priceIDs[7] = 1200;
-    priceIDs[8] = 2406;
-    priceIDs[9] = 1998;
-    priceIDs[10] = 3496;
-    priceIDs[11] = 3501;
-    priceIDs[12] = 4986;
-    priceIDs[13] = 4991;
-    priceIDs[14] = 4994;
-    priceIDs[15] = 1248;
-    priceIDs[16] = 3496;
-    priceIDs[17] = 6243;
-    priceIDs[18] = 3496;
-    priceIDs[19] = 4994;
-    priceIDs[20] = 6492;
-    priceIDs[21] = 1998;
-    priceIDs[22] = 2996;
-    priceIDs[23] = 3496;
-    priceIDs[24] = 3995;
-    priceIDs[25] = 5993;
-    priceIDs[26] = 6000;
-    priceIDs[27] = 2803;
-    priceIDs[28] = 3772;
-    priceIDs[29] = 4995;
-    priceIDs[30] = 1648;
-    priceIDs[31] = 2996;
-    priceIDs[32] = 3995;
-    priceIDs[33] = 3502;
-    priceIDs[34] = 4502;
-    priceIDs[35] = 5003;
-    priceIDs[36] = 585;
-    priceIDs[37] = 725;
-    priceIDs[38] = 1449;
-    priceIDs[39] = 3995;
-    priceIDs[40] = 4994;
-    priceIDs[41] = 7490;
-    priceIDs[42] = 2752;
-    priceIDs[43] = 1599;
-    priceIDs[44] = 3602;
-    return priceIDs[itemID];
-}
+int items[45][3] = {
+    // Keyboard Fantech
+    {2708, false, 0},
+    {1201, false, 0},
+    {973, false, 0},
+    
+    // Keyboard Logitech
+    {2423, false, 0},
+    {8031, false, 0},
+    {12485, false, 0},
+    
+    //Keyboard Rakk
+    {1803, false, 0},
+    {1200, false, 0},
+    {2406, false, 0},
+    
+    //Mouse Razer
+    {1998, false, 0},
+    {3496, false, 0},
+    {3511, false, 0},
+    
+    //Mouse Logitech
+    {4985, false, 0},
+    {4991, false, 0},
+    {4993, false, 0},
+    
+    //Mouse Asus
+    {1248, false, 0},
+    {3496, false, 0},
+    {6243, false, 0},
+    
+    //Headset Razer
+    {3496, false, 0},
+    {4994, false, 0},
+    {6492, false, 0},
+    
+    //Headset Corsair
+    {1998, false, 0},
+    {2996, false, 0},
+    {3496, false, 0},
+    
+    //Headset Steel Series
+    {3995, false, 0},
+    {5993, false, 0},
+    {6000, false, 0},
+    
+    //Webcam Logitech
+    {2803, false, 0},
+    {3772, false, 0},
+    {4995, false, 0},
+    
+    //Webcam Microsoft
+    {1648, false, 0},
+    {2996, false, 0},
+    {3995, false, 0},
+    
+    //Webcam Ausdom
+    {3502, false, 0},
+    {725, false, 0},
+    {1448, false, 0},
+    
+    //Gamepad Senze
+    {585, false, 0},
+    {725, false, 0},
+    {1448, false, 0},
+    
+    //Gamepad Razer
+    {3995, false, 0},
+    {4994, false, 0},
+    {7491, false, 0},
+    
+    //Gamepad Sony
+    {2752, false, 0},
+    {1599, false, 0},
+    {3602, false, 0},
+};
 
 int itemCounter = 0;
-string cartItems[45];
-int cartPrices[45];
-int itemQuantity[45];
-int itemIDCart[45];
-bool inCart[45];
-int cartIndex[45];
+string cartItemsNames[45];
+int cart[45];
 bool repeatMenu;
 
 void clearCart() {
     itemCounter = 0;
+    
     for (int i = 0; i < 45; i++) {
-        cartItems[i].clear();
-        cartPrices[i] = 0;
-        itemQuantity[i] = 0;
-        inCart[i] = false;
-        cartIndex[i] = 0;
-        itemIDCart[i] = 0;
+        cartItemsNames[i].clear();
+        items[i][1] = false;
+        items[i][2] = 0;
+        cart[i] = 0;
     }
 }
 
 void showShoppingCart() {
-     cout << "#: Item Name:\t\t\t\t\t\t   #:\tPrice:  *:\t=:" << endl;
+     cout << "#: Item Name:\t\t\t\t\t   \tPrice:  *:\t=:" << endl;
     for (int i = 0; i < itemCounter; i++) {
-        cout << (i+1) << ". " << cartItems[i] << " #" << itemIDCart[i] << "\t" << "P" << cartPrices[i] << "\t" << itemQuantity[i] << "\tP" << cartPrices[i] * itemQuantity[i] << endl;
+        cout << (i+1) << ". " << cartItemsNames[i] << "\t" << "P" << items[cart[i]][0] << "\t" << items[cart[i]][2] << "\tP" << items[cart[i]][0] * items[cart[i]][2] << endl;
     }
 }
 
 void addToCart(int itemID) {
-    if (inCart[itemID]) {
+    if (items[itemID][2] > 0) {
         cout << "How many will you modify?" << endl;
-        cout << "Current quantity: " << itemQuantity[cartIndex[itemID]] << endl;
+        cout << "Current quantity: " << items[itemID][2] << endl;
         cout << "(+/-)(#): ";
         char operation;
         int newQuantity = 0;
@@ -178,8 +200,8 @@ void addToCart(int itemID) {
         switch (operation) {
             case '+':
                 validateCinInt(newQuantity, 0);
-                if (newQuantity >= 1) {
-                    itemQuantity[cartIndex[itemID]] = itemQuantity[cartIndex[itemID]] + newQuantity;
+                if (newQuantity > 0) {
+                    items[itemID][2] += newQuantity;
                     cout << newQuantity << " quantities have been successfully added." << endl;
                 } else {
                     cout << "The quantity of this item is not added to the cart" << endl;
@@ -187,11 +209,11 @@ void addToCart(int itemID) {
                 break;
             case '-':
                 validateCinInt(newQuantity, 0);
-                if (newQuantity >= itemQuantity[cartIndex[itemID]]) {
-                    itemQuantity[cartIndex[itemID]] = 1;
+                if (newQuantity >= items[itemID][2]) {
+                    items[itemID][2] = 1;
                     cout << "The quantity is subtracted to 1" << endl;
                 } else {
-                    itemQuantity[cartIndex[itemID]] = itemQuantity[cartIndex[itemID]] - newQuantity;
+                    items[itemID][2] -= newQuantity;
                     cout << newQuantity << " quantities have been successfully subtracted" << endl;
                 }
                 break;
@@ -204,12 +226,10 @@ void addToCart(int itemID) {
         int checkQuantity = 0;
         validateCinInt(checkQuantity, 0);
         if (checkQuantity >= 1) {
-            inCart[itemID] = true;
-            cartIndex[itemID] = itemCounter;
-            itemIDCart[cartIndex[itemID]] = itemID;
-            cartItems[cartIndex[itemID]] = itemList(itemID);
-            cartPrices[cartIndex[itemID]] = priceList(itemID);
-            itemQuantity[cartIndex[itemID]] = checkQuantity;
+            items[itemID][1] = true;
+            items[itemID][2] = checkQuantity;
+            cartItemsNames[itemCounter] = itemList(itemID);
+            cart[itemCounter] = itemID;
             itemCounter++;
         } else {
             cout << "Your item was not added to the cart" << endl << endl;
@@ -218,29 +238,25 @@ void addToCart(int itemID) {
 }
 
 void removeFromCart(int cartID) {
-    inCart[itemIDCart[cartID]] = false;
-    cartIndex[itemIDCart[cartID]] = 0;
-    itemIDCart[cartIndex[cartID]] = 0;
+    items[cart[cartID]][1] = false;    
+    items[cart[cartID]][2] = 0;
     for (int i = cartID; i < itemCounter; i++) {
         if (i+1 == itemCounter) {
             
         } else {
-            itemIDCart[i] = itemIDCart[i+1];
-            cartItems[i] = cartItems[i+1];
-            cartPrices[i] = cartPrices[i+1];
-            itemQuantity[i] = itemQuantity[i+1];
-            itemIDCart[i] = itemIDCart[i+1];
-            
+            cart[i] = cart[i+1];
+            cartItemsNames[i] = cartItemsNames[i+1];
         }
     }
+            
     itemCounter--;
 }
 
 void subcategoryMenu(int firstCase, int secondCase, int thirdCase) {
     cout << "#: Price: Item Name:" << endl;
-    cout << "1. P" << priceList(firstCase) << " " << itemList(firstCase) << endl;
-    cout << "2. P" << priceList(secondCase) << " " << itemList(secondCase) << endl;
-    cout << "3. P" << priceList(thirdCase) << " " << itemList(thirdCase) << endl;
+    cout << "1. P" << items[firstCase][0] << " " << itemList(firstCase) << endl;
+    cout << "2. P" << items[secondCase][0] << " " << itemList(secondCase) << endl;
+    cout << "3. P" << items[thirdCase][0] << " " << itemList(thirdCase) << endl;
     cout << "4. Back to previous menu" << endl;
     cout << "0. Back to main menu" << endl;
     cout << "Enter a number: ";
@@ -249,7 +265,7 @@ void subcategoryMenu(int firstCase, int secondCase, int thirdCase) {
 void subcategorySwitch(string brandName, int firstCase, int secondCase, int thirdCase) {
     int selection;
     bool back = true;
-    do {\
+    do {
         cout << endl << brandName << ":" << endl;
         subcategoryMenu(firstCase, secondCase, thirdCase);
         validateCinInt(selection, 5);
@@ -350,9 +366,11 @@ bool repeat(int mode) {
 
 int calculateTotalPrice(int totalPrice) {
     totalPrice = 0;
+    
     for (int i = 0; i < itemCounter; i++) {
-    totalPrice = totalPrice + (cartPrices[i] * itemQuantity[i]);
+        totalPrice += (items[cart[i]][0] * items[cart[i]][2]);
     }
+    
     return totalPrice;
 }
 
