@@ -39,131 +39,158 @@ void validateCinInt(int &number, int failReturn) {
     }
 }
 
-string itemList(int itemID) {
-    string itemIDs[45];
-    itemIDs[0] = "Fantech MK853 Max Power BLUE SWITCH RGB Gaming Keyboard";
-    itemIDs[1] = "Fantech K513 Booster Gaming Keyboard                   ";
-    itemIDs[2] = "Fantech K613L Fighter II Full Size Gaming Keyboard     ";
-    itemIDs[3] = "Logitech G213 Prodigy Keyboard                         ";
-    itemIDs[4] = "Logitech G813 Keyboard                                 ";
-    itemIDs[5] = "Logitech G915 Lightspeed Keyboard                      ";
-    itemIDs[6] = "Rakk Lam-Ang Lite Keyboard                             ";
-    itemIDs[7] = "Rakk Tandus Wired Keyboard, Mechanical                 ";
-    itemIDs[8] = "Rakk Ilis Wired Keyboard, Mechanical                   ";
-    itemIDs[9] = "Razer Viper Mini Mouse                                 ";
-    itemIDs[10] = "Razer DeathAdder V2 Mouse                              ";
-    itemIDs[11] = "Razer Basilisk V3 Mouse                                ";
-    itemIDs[12] = "Logitech MX ERGO Mouse                                 ";
-    itemIDs[13] = "Logitech MX Master Mouse                               ";
-    itemIDs[14] = "Logitech MX Vertical Mouse                             ";
-    itemIDs[15] = "ASUS TUF Gaming M5 Mouse                               ";
-    itemIDs[16] = "ASUS P504 ROG Gladius II Origin Mouse                  ";
-    itemIDs[17] = "ASUS ROG GX1000 Eagle Eye Mouse                        ";
-    itemIDs[18] = "Razer Kraken V3 X Headset                              ";
-    itemIDs[19] = "Razer BlackShark V2 Headset                            ";
-    itemIDs[20] = "Razer Kraken Ultimate Headset                          ";
-    itemIDs[21] = "Corsair H535 Stereo Gaming Headset                     ";
-    itemIDs[22] = "Corsair VOID RGB ELITE Premium Gaming Headset          ";
-    itemIDs[23] = "Corsair HS60 SURROUND Gaming Headset                   ";
-    itemIDs[24] = "Steel Series Arctis 3 Black Headset                    ";
-    itemIDs[25] = "Steel Series Arctis Prime Headset                      ";
-    itemIDs[26] = "Steel Series Arctis Pro Headset                        ";
-    itemIDs[27] = "Logitech C920 Pro 120° Webcam                          ";
-    itemIDs[28] = "Logitech C925e 1080p Business HD Webcam                ";
-    itemIDs[29] = "Logitech C922 HD Pro Stream Webcam                     ";
-    itemIDs[30] = "Microsoft LifeCam HD-3000 Webcam                       ";
-    itemIDs[31] = "Microsoft LifeCam Cinema 720 HD Webcam                 ";
-    itemIDs[32] = "Microsoft Lifecam Studio Webcam                        ";
-    itemIDs[33] = "AUSDOM AW620 Webcam                                    ";
-    itemIDs[34] = "AUSDOM AW651 Webcam                                    ";
-    itemIDs[35] = "AUSDOM AW635 Webcam                                    ";
-    itemIDs[36] = "Senze Dual Analogic 3D Gamepad                         ";
-    itemIDs[37] = "Senze Sz-4011b Gamepad                                 ";
-    itemIDs[38] = "Senze Sz-5001b Gamepad                                 ";
-    itemIDs[39] = "Razer Raion Fightpad Gamepad                           ";
-    itemIDs[40] = "Razer Wolverine V2 Gamepad                             ";
-    itemIDs[41] = "Razer Wolverine V2 Chroma Gamepad                      ";
-    itemIDs[42] = "Sony Dualshock 3 Gamepad                               ";
-    itemIDs[43] = "Sony Dualshock 4 Gamepad                               ";
-    itemIDs[44] = "Sony Dualshock 5 Gamepad                               ";
-    return itemIDs[itemID];
-}
-
-int items[45][3] = {
+string itemNames[45] = {
     // Keyboard Fantech
-    {2708, false, 0}, // 0
-    {1201, false, 0}, // 1
-    {973, false, 0}, // 2
+    "Fantech MK853 Max Power BLUE SWITCH RGB Gaming Keyboard", // 0
+    "Fantech K513 Booster Gaming Keyboard                   ", // 1
+    "Fantech K613L Fighter II Full Size Gaming Keyboard     ", // 2
     
     // Keyboard Logitech
-    {2423, false, 0}, // 3
-    {8031, false, 0}, // 4
-    {12485, false, 0}, // 5
+    "Logitech G213 Prodigy Keyboard                         ", // 3
+    "Logitech G813 Keyboard                                 ", // 4
+    "Logitech G915 Lightspeed Keyboard                      ", // 5
     
-    //Keyboard Rakk
-    {1803, false, 0}, // 6
-    {1200, false, 0}, // 7
-    {2406, false, 0}, // 8
+    // Keyboard Rakk
+    "Rakk Lam-Ang Lite Keyboard                             ", // 6
+    "Rakk Tandus Wired Keyboard, Mechanical                 ", // 7
+    "Rakk Ilis Wired Keyboard, Mechanical                   ", // 8
     
-    //Mouse Razer
-    {1998, false, 0}, // 9
-    {3496, false, 0}, // 10
-    {3511, false, 0}, // 11
+    // Mouse Razer
+    "Razer Viper Mini Mouse                                 ", // 9
+    "Razer DeathAdder V2 Mouse                              ", // 10
+    "Razer Basilisk V3 Mouse                                ", // 11
     
-    //Mouse Logitech
-    {4985, false, 0}, // 12
-    {4991, false, 0}, // 13
-    {4993, false, 0}, // 14
+    // Mouse Logitech
+    "Logitech MX ERGO Mouse                                 ", // 12
+    "Logitech MX Master Mouse                               ", // 13
+    "Logitech MX Vertical Mouse                             ", // 14
     
-    //Mouse Asus
-    {1248, false, 0}, // 15
-    {3496, false, 0}, // 16
-    {6243, false, 0}, // 17
+    // Mouse Asus
+    "ASUS TUF Gaming M5 Mouse                               ", // 15
+    "ASUS P504 ROG Gladius II Origin Mouse                  ", // 16
+    "ASUS ROG GX1000 Eagle Eye Mouse                        ", // 17
     
-    //Headset Razer
-    {3496, false, 0}, // 18
-    {4994, false, 0}, // 19
-    {6492, false, 0}, // 20
+    // Headset Razer
+    "Razer Kraken V3 X Headset                              ", // 18
+    "Razer BlackShark V2 Headset                            ", // 19
+    "Razer Kraken Ultimate Headset                          ", // 20
+            
+    // Headset Corsair
+    "Corsair H535 Stereo Gaming Headset                     ", // 21
+    "Corsair VOID RGB ELITE Premium Gaming Headset          ", // 22
+    "Corsair HS60 SURROUND Gaming Headset                   ", // 23
     
-    //Headset Corsair
-    {1998, false, 0}, // 21
-    {2996, false, 0}, // 22
-    {3496, false, 0}, // 23
+    // Headset Steel Series
+    "Steel Series Arctis 3 Black Headset                    ", // 24
+    "Steel Series Arctis Prime Headset                      ", // 25
+    "Steel Series Arctis Pro Headset                        ", // 26
     
-    //Headset Steel Series
-    {3995, false, 0}, // 24
-    {5993, false, 0}, // 25
-    {6000, false, 0}, // 26
+    // Webcam Logitech
+    "Logitech C920 Pro 120° Webcam                          ", // 27
+    "Logitech C925e 1080p Business HD Webcam                ", // 28
+    "Logitech C922 HD Pro Stream Webcam                     ", // 29
+            
+    // Webcam Microsoft
+    "Microsoft LifeCam HD-3000 Webcam                       ", // 30
+    "Microsoft LifeCam Cinema 720 HD Webcam                 ", // 31
+    "Microsoft Lifecam Studio Webcam                        ", // 32
+            
+    // Webcam Ausdom
+    "AUSDOM AW620 Webcam                                    ", // 33
+    "AUSDOM AW651 Webcam                                    ", // 34
+    "AUSDOM AW635 Webcam                                    ", // 35
     
-    //Webcam Logitech
-    {2803, false, 0}, // 27
-    {3772, false, 0}, // 28
-    {4995, false, 0}, // 29
+    // Gamepad Senze
+    "Senze Dual Analogic 3D Gamepad                         ", // 36
+    "Senze Sz-4011b Gamepad                                 ", // 37
+    "Senze Sz-5001b Gamepad                                 ", // 38
     
-    //Webcam Microsoft
-    {1648, false, 0}, // 30
-    {2996, false, 0}, // 31
-    {3995, false, 0}, // 32
-    
-    //Webcam Ausdom
-    {3502, false, 0}, // 33
-    {725, false, 0}, // 34
-    {1448, false, 0}, // 35
-    
-    //Gamepad Senze
-    {585, false, 0}, // 36
-    {725, false, 0}, // 37
-    {1448, false, 0}, // 38
-    
-    //Gamepad Razer
-    {3995, false, 0}, // 39
-    {4994, false, 0}, // 40
-    {7491, false, 0}, // 41
+    // Gamepad Razer
+    "Razer Raion Fightpad Gamepad                           ", // 39
+    "Razer Wolverine V2 Gamepad                             ", // 40
+    "Razer Wolverine V2 Chroma Gamepad                      ", // 41
     
     //Gamepad Sony
-    {2752, false, 0}, // 42
-    {1599, false, 0}, // 43
-    {3602, false, 0}, // 44
+    "Sony Dualshock 3 Gamepad                               ", // 42
+    "Sony Dualshock 4 Gamepad                               ", // 43
+    "Sony Dualshock 5 Gamepad                               " // 44
+};
+
+int items[45][2] = {
+    // Keyboard Fantech
+    {2708, 0}, // 0
+    {1201, 0}, // 1
+    {973, 0}, // 2
+    
+    // Keyboard Logitech
+    {2423, 0}, // 3
+    {8031, 0}, // 4
+    {12485, 0}, // 5
+    
+    //Keyboard Rakk
+    {1803, 0}, // 6
+    {1200, 0}, // 7
+    {2406, 0}, // 8
+    
+    //Mouse Razer
+    {1998, 0}, // 9
+    {3496, 0}, // 10
+    {3511, 0}, // 11
+    
+    //Mouse Logitech
+    {4985, 0}, // 12
+    {4991, 0}, // 13
+    {4993, 0}, // 14
+    
+    //Mouse Asus
+    {1248, 0}, // 15
+    {3496, 0}, // 16
+    {6243, 0}, // 17
+    
+    //Headset Razer
+    {3496, 0}, // 18
+    {4994, 0}, // 19
+    {6492, 0}, // 20
+    
+    //Headset Corsair
+    {1998, 0}, // 21
+    {2996, 0}, // 22
+    {3496, 0}, // 23
+    
+    //Headset Steel Series
+    {3995, 0}, // 24
+    {5993, 0}, // 25
+    {6000, 0}, // 26
+    
+    //Webcam Logitech
+    {2803, 0}, // 27
+    {3772, 0}, // 28
+    {4995, 0}, // 29
+    
+    //Webcam Microsoft
+    {1648, 0}, // 30
+    {2996, 0}, // 31
+    {3995, 0}, // 32
+    
+    //Webcam Ausdom
+    {3502, 0}, // 33
+    {725, 0}, // 34
+    {1448, 0}, // 35
+    
+    //Gamepad Senze
+    {585, 0}, // 36
+    {725, 0}, // 37
+    {1448, 0}, // 38
+    
+    //Gamepad Razer
+    {3995, 0}, // 39
+    {4994, 0}, // 40
+    {7491, 0}, // 41
+    
+    //Gamepad Sony
+    {2752, 0}, // 42
+    {1599, 0}, // 43
+    {3602, 0}, // 44
 };
 
 int itemCounter = 0;
@@ -176,23 +203,22 @@ void clearCart() {
     
     for (int i = 0; i < 45; i++) {
         cartItemsNames[i].clear();
-        items[i][1] = false;
-        items[i][2] = 0;
+        items[i][1] = 0;
         cart[i] = 0;
     }
 }
 
 void showShoppingCart() {
-     cout << "#: Item Name:\t\t\t\t\t   \tPrice:  *:\t=:" << endl;
+     cout << "#: Item Name:\t\t\t\t\t\t   \tPrice:  *:\t=:" << endl;
     for (int i = 0; i < itemCounter; i++) {
-        cout << (i+1) << ". " << cartItemsNames[i] << "\t" << "P" << items[cart[i]][0] << "\t" << items[cart[i]][2] << "\tP" << items[cart[i]][0] * items[cart[i]][2] << endl;
+        cout << (i+1) << ". " << cartItemsNames[i] << "\t" << "P" << items[cart[i]][0] << "\t" << items[cart[i]][1] << "\tP" << items[cart[i]][0] * items[cart[i]][1] << endl;
     }
 }
 
 void addToCart(int itemID) {
-    if (items[itemID][2] > 0) {
+    if (items[itemID][1] > 0) {
         cout << "How many will you modify?" << endl;
-        cout << "Current quantity: " << items[itemID][2] << endl;
+        cout << "Current quantity: " << items[itemID][1] << endl;
         cout << "(+/-)(#): ";
         char operation;
         int newQuantity = 0;
@@ -201,7 +227,7 @@ void addToCart(int itemID) {
             case '+':
                 validateCinInt(newQuantity, 0);
                 if (newQuantity > 0) {
-                    items[itemID][2] += newQuantity;
+                    items[itemID][1] += newQuantity;
                     cout << newQuantity << " quantities have been successfully added." << endl;
                 } else {
                     cout << "The quantity of this item is not added to the cart" << endl;
@@ -209,11 +235,11 @@ void addToCart(int itemID) {
                 break;
             case '-':
                 validateCinInt(newQuantity, 0);
-                if (newQuantity >= items[itemID][2]) {
-                    items[itemID][2] = 1;
+                if (newQuantity >= items[itemID][1]) {
+                    items[itemID][1] = 1;
                     cout << "The quantity is subtracted to 1" << endl;
                 } else {
-                    items[itemID][2] -= newQuantity;
+                    items[itemID][1] -= newQuantity;
                     cout << newQuantity << " quantities have been successfully subtracted" << endl;
                 }
                 break;
@@ -226,9 +252,8 @@ void addToCart(int itemID) {
         int checkQuantity = 0;
         validateCinInt(checkQuantity, 0);
         if (checkQuantity >= 1) {
-            items[itemID][1] = true;
-            items[itemID][2] = checkQuantity;
-            cartItemsNames[itemCounter] = itemList(itemID);
+            items[itemID][1] = checkQuantity;
+            cartItemsNames[itemCounter] = itemNames[itemID];
             cart[itemCounter] = itemID;
             itemCounter++;
         } else {
@@ -238,8 +263,7 @@ void addToCart(int itemID) {
 }
 
 void removeFromCart(int cartID) {
-    items[cart[cartID]][1] = false;    
-    items[cart[cartID]][2] = 0;
+    items[cart[cartID]][1] = 0;
     for (int i = cartID; i < itemCounter; i++) {
         if (i+1 == itemCounter) {
             
@@ -254,9 +278,9 @@ void removeFromCart(int cartID) {
 
 void subcategoryMenu(int firstCase, int secondCase, int thirdCase) {
     cout << "#: Price: Item Name:" << endl;
-    cout << "1. P" << items[firstCase][0] << " " << itemList(firstCase) << endl;
-    cout << "2. P" << items[secondCase][0] << " " << itemList(secondCase) << endl;
-    cout << "3. P" << items[thirdCase][0] << " " << itemList(thirdCase) << endl;
+    cout << "1. P" << items[firstCase][0] << " " << itemNames[firstCase] << endl;
+    cout << "2. P" << items[secondCase][0] << " " << itemNames[secondCase] << endl;
+    cout << "3. P" << items[thirdCase][0] << " " << itemNames[thirdCase] << endl;
     cout << "4. Back to previous menu" << endl;
     cout << "0. Back to main menu" << endl;
     cout << "Enter a number: ";
@@ -368,7 +392,7 @@ int calculateTotalPrice(int totalPrice) {
     totalPrice = 0;
     
     for (int i = 0; i < itemCounter; i++) {
-        totalPrice += (items[cart[i]][0] * items[cart[i]][2]);
+        totalPrice += (items[cart[i]][0] * items[cart[i]][1]);
     }
     
     return totalPrice;
