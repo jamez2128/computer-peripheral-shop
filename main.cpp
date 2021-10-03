@@ -26,7 +26,7 @@ string stringToLower(string convertFrom) {
 }
 
 void clearMessage() {
-    system("clear");
+    system("clear || cls");
 }
 
 void validateCinInt(int &number, int failReturn) {
