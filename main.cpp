@@ -244,7 +244,7 @@ void addToCart(int itemID) {
                     items[itemID][1] = 1;
                     clearMessage();
                     cout << "The quantity is subtracted to 1" << endl << endl;
-                } else if (items[itemID][2] >= newQuantity) {
+                } else if (items[itemID][1] >= newQuantity) {
                     items[itemID][1] -= newQuantity;
                     clearMessage();
                     cout << newQuantity << " quantities has been successfully removed" << endl << endl;
