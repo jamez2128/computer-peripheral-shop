@@ -232,10 +232,10 @@ void addToCart(int itemID) {
                 if (newQuantity > 0) {
                     items[itemID][1] += newQuantity;
                     clearMessage();
-                    cout << newQuantity << " quantities has been added successfully." << endl << endl;
+                    cout << newQuantity << " quantities has been added for" << endl << itemNames[itemID] << endl << endl;
                 } else {
                     clearMessage();
-                    cout << "The quantity of this item is not added to the cart" << endl << endl;
+                    cout << "The quantity for " << itemNames[itemID] << endl << "is not added to the cart" << endl << endl;
                 }
                 break;
             case '-':
@@ -243,19 +243,19 @@ void addToCart(int itemID) {
                 if (newQuantity >= items[itemID][1]) {
                     items[itemID][1] = 1;
                     clearMessage();
-                    cout << "The quantity is subtracted to 1" << endl << endl;
-                } else if (items[itemID][1] >= newQuantity) {
+                    cout << "The quantity for " << itemNames[itemID] << endl << "has been reduced to 1" << endl << endl;
+                } else if (newQuantity == 0) {
+                    clearMessage();
+                    cout << "The quantity for " << itemNames[itemID] << endl << "is not reduced from the cart" << endl << endl;
+                } else {
                     items[itemID][1] -= newQuantity;
                     clearMessage();
-                    cout << newQuantity << " quantities has been successfully removed" << endl << endl;
-                }  else {
-                    clearMessage();
-                    cout << "The quantity of this item is not added to the cart" << endl << endl;
+                    cout << newQuantity << " quantities has been reduced for" << endl << itemNames[itemID] << endl << endl;
                 }
                 break;
             default:
                 clearMessage();
-                cout << "Please specify the operation" << endl << endl;
+                cout << "Please specify the operation first then type the number" << endl << endl;
                 break;
         }
     } else {
@@ -268,7 +268,7 @@ void addToCart(int itemID) {
             cart[itemCounter] = itemID;
             itemCounter++;
             clearMessage();
-            cout << "An item with " << items[itemID][1] << " quantitites has been successfully added." << endl << endl;
+            cout << itemNames[itemID] << endl << "with " << items[itemID][1] << " quantitites has been successfully added." << endl << endl;
         } else {
             clearMessage();
             cout << "Your item was not added to the cart" << endl << endl;
@@ -277,6 +277,7 @@ void addToCart(int itemID) {
 }
 
 void removeFromCart(int cartID) {
+    string removedItem = itemNames[cart[cartID]];
     items[cart[cartID]][1] = 0;
     for (int i = cartID; i < itemCounter; i++) {
         if (i+1 == itemCounter) {
@@ -287,8 +288,9 @@ void removeFromCart(int cartID) {
             cartItemsNames[i] = cartItemsNames[i+1];
         }
     }
-            
     itemCounter--;
+    clearMessage();
+    cout << removedItem << endl << "has been removed from the cart successfully" << endl << endl;
 }
 
 void subcategoryMenu(int firstCase, int secondCase, int thirdCase) {
@@ -443,7 +445,7 @@ int main() {
                 cout << endl << "\t\t\t\t\t\t\t\t   Total price: P" << calculateTotalPrice(totalPrice) << endl;
             }
 
-            cout << "How may we help you?" << endl;
+            cout << "Hi " << firstName << ", " << "how may we help you?" << endl;
             mainMenu();
             int selection;
             validateCinInt(selection, 10);
@@ -451,7 +453,7 @@ int main() {
                 case 0:
                     if (itemCounter == 0) {
                         clearMessage();
-                        cout << "Nothing is in the cart" << endl << endl;
+                        cout << "The command can't be processed as nothing is in the cart" << endl << endl;
                     } else {
                         clearMessage();
                         totalPrice = calculateTotalPrice(totalPrice);
@@ -513,11 +515,12 @@ int main() {
                 case 6:
                     clearMessage();
                     clearCart();
+                    cout << "The cart has been cleared successfully" << endl << endl;
                     break;
                 case 7:
                     if (itemCounter == 0) {
                         clearMessage();
-                        cout << "Nothing is in the cart" << endl << endl;
+                        cout << "The command can't be processed as nothing is in the cart" << endl << endl;
                     } else {
                         clearMessage();
                         showShoppingCart();
@@ -527,8 +530,10 @@ int main() {
                         validateCinInt(removeItem, 0);
                         if (removeItem >= 1 && removeItem <= itemCounter) {
                             removeFromCart(removeItem-1);
+                        } else {
+                            clearMessage();
+                            cout << "The number that you entered is not in one of the choices." << endl << endl;
                         }
-                        clearMessage();
                     }
                     break;
                 case 8:
