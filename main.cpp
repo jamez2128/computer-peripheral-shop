@@ -489,7 +489,7 @@ int main() {
                             }
                             } else if (amount == 0) {
                                 clearMessage();
-                                cout << "The checkout has been canceled" << endl << endl;
+                                cout << "The checkout has been cancelled" << endl << endl;
                             } else {
                                 clearMessage();
                                 cout << "The amount you entered is in insufficient." << endl;
